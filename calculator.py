@@ -19,21 +19,23 @@ def sub(a, b):
 # Multiply function
 # a -- multiplicand
 # b -- multiplier
-#def mult(a, b):
-#    return a * b
+def mult(a, b):
+    return a * b
 
 # Divide function
 # a -- dividend
 # b -- divisor
-#def div(a, b):
-#    return a / b
+def div(a, b):
+   if b == 0:
+       return "Error! Division by zero is not allowed."
+   return a / b
 
 
 # -------------------------------------------------------- #
 
 
 # -------------------------------------------------------- #
-# -- MAIN FUNCTIONAILTY -- DO NOT EDIT ------------------- #
+# -- MAIN FUNCTIONALITY -- DO NOT EDIT ------------------- #
 # -------------------------------------------------------- #
 
 a = None
