@@ -30,6 +30,14 @@ def div(a, b):
        return "Error! Division by zero is not allowed."
    return a / b
 
+# Exponential function
+# a -- base
+# b -- exponent
+def exp(a, b):
+    return a ** b
+
+
+
 # -------------------------------------------------------- #
 # -- MAIN FUNCTIONALITY ---------------------------------- #
 # -------------------------------------------------------- #
@@ -53,6 +61,8 @@ def main():
             print("Product: ", mult(a, b))
         elif op == "/":
             print("Quotient: ", div(a, b))
+        elif op == "**":
+            print("Exponentiation: ", exp(a, b))
         else:
             print("Invalid operation...")
     else:
@@ -83,6 +93,8 @@ def main():
                     print("Product: ", mult(a, b))
                 elif op == "/":
                     print("Quotient: ", div(a, b))
+                elif op == "**":
+                    print("Exponentiation: ", exp(a, b))
                 else:
                     print("Invalid operation...")
 
