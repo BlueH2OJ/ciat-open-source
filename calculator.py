@@ -1,4 +1,5 @@
 import sys
+import math
 
 # -------------------------------------------------------- #
 # -- CALCULATOR FUNCTIONS -------------------------------- #
@@ -30,13 +31,34 @@ def div(a, b):
        return "Error! Division by zero is not allowed."
    return a / b
 
-# Exponential function
+# Modulus function
+# a -- dividend
+# b -- divisor
+def mod(a, b):
+   if b == 0:
+       return "Error! Division by zero is not allowed."
+   return a % b
+
+# Exponentiation function
 # a -- base
 # b -- exponent
 def exp(a, b):
-    return a ** b
+   return a ** b
 
+# Integer Division function
+# a -- dividend
+# b -- divisor
+def int_div(a, b):
+   if b == 0:
+       return "Error! Division by zero is not allowed."
+   return a // b
 
+# Square Root function
+# a -- number to find the square root of
+def sqrt(a):
+   if a < 0:
+       return "Error! Square root of a negative number is not defined in real numbers."
+   return math.sqrt(a)
 
 # -------------------------------------------------------- #
 # -- MAIN FUNCTIONALITY ---------------------------------- #
@@ -46,61 +68,83 @@ def main():
     if len(sys.argv) == 4:
         # Command-line arguments mode
         try:
-            a = int(sys.argv[1])
+            a = float(sys.argv[1])
             op = sys.argv[2]
-            b = int(sys.argv[3])
+            b = float(sys.argv[3])
         except ValueError:
             print("Invalid number argument...")
             return
 
-        if op == "+":
-            print("Sum: ", add(a, b))
-        elif op == "-":
-            print("Difference: ", sub(a, b))
-        elif op == "*":
-            print("Product: ", mult(a, b))
-        elif op == "/":
-            print("Quotient: ", div(a, b))
-        elif op == "**":
-            print("Exponentiation: ", exp(a, b))
-        else:
-            print("Invalid operation...")
+        result = calculate(a, op, b)
+        print("Result: ", result)
+
     else:
         # Interactive mode
-        a = None
-        b = None
-        op = None
-
         while True:
-            # get input values
-            a = input("Enter the first argument: ")
-            op = input("Enter the operation: ")
-            b = input("Enter the second argument: ")
             try:
-                a = int(a)
-                b = int(b)
+                a = float(input("Enter the first argument: "))
             except ValueError:
-                print("Invalid number argument...")
-                op = None
+                print("Invalid input. Please enter a number.")
+                continue
 
-            # decide function
-            if op != None:
-                if op == "+":
-                    print("Sum: ", add(a, b))
-                elif op == "-":
-                    print("Difference: ", sub(a, b))
-                elif op == "*":
-                    print("Product: ", mult(a, b))
-                elif op == "/":
-                    print("Quotient: ", div(a, b))
-                elif op == "**":
-                    print("Exponentiation: ", exp(a, b))
+            while True:
+                op = input("Enter the operation (+, -, *, /, %, **, //, sqrt) or 'help' for options: ")
+
+                if op == "help":
+                    show_help()
+                    continue
+
+                if op == "sqrt":
+                    result = sqrt(a)
+                    print(f"Square root of {a} is: {result}")
                 else:
-                    print("Invalid operation...")
+                    try:
+                        b = float(input("Enter the second argument: "))
+                    except ValueError:
+                        print("Invalid input. Please enter a number.")
+                        continue
 
-            q = input("Quit? [y/n] ")
-            if q == "y" or q == "Y":
+                    result = calculate(a, op, b)
+                    print(f"Result: {a} {op} {b} = {result}")
+
+                q = input("Do you want to continue with this result? [y/n]: ")
+                if q.lower() == 'y':
+                    a = result
+                else:
+                    break
+
+            q = input("Quit the calculator? [y/n]: ")
+            if q.lower() == 'y':
                 break
+
+def calculate(a, op, b=None):
+    if op == "+":
+        return add(a, b)
+    elif op == "-":
+        return sub(a, b)
+    elif op == "*":
+        return mult(a, b)
+    elif op == "/":
+        return div(a, b)
+    elif op == "%":
+        return mod(a, b)
+    elif op == "**":
+        return exp(a, b)
+    elif op == "//":
+        return int_div(a, b)
+    else:
+        return "Invalid operation"
+
+def show_help():
+    print("Available operations:")
+    print("+ : Addition")
+    print("- : Subtraction")
+    print("* : Multiplication")
+    print("/ : Division")
+    print("% : Modulus")
+    print("** : Exponentiation")
+    print("// : Integer Division")
+    print("sqrt : Square Root")
 
 if __name__ == "__main__":
     main()
